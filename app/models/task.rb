@@ -6,4 +6,6 @@ class Task < ApplicationRecord
   attribute :completed_percentage, :integer # typecast
 
   attribute :labels, :string, array: true # virtual field
+
+  attribute :description, :upcase_description # custom type
 end
