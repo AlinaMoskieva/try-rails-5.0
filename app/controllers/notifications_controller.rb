@@ -26,8 +26,10 @@ class NotificationsController < ApplicationController
   def create
     @notification = Notification.new(notification_params)
 
+
     respond_to do |format|
       if @notification.save
+        ActionCable.server.broadcast 'web_notifications_channel', notification: "alina", count: Notification.all.count
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
         format.json { render :show, status: :created, location: @notification }
       else
